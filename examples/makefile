@@ -32,7 +32,11 @@ usage:
 	@echo "Makefile for boundary integral examplee, please specify what to make:"
 	@echo ""
 	@echo "  make helmholtz/"
-	@echo "         "
+	@echo "         dir/"
+	@echo "           geo_exact ............... exact analytic geometry"
+	@echo "           geo_go3 ................. load a go3 data file"
+	@echo "           scattering .............. solve a scattering problem"
+	@echo ""
 	@echo "  make maxwell/"
 	@echo "         pec/"
 	@echo "           aumfie .................. solve the mfie, then resolve for charge"
@@ -64,6 +68,25 @@ usage:
 
 %.o : %.f90  
 	$(FC) -c $(FFLAGS) $< -o $@ $(FEND)
+
+
+# Helmholtz
+
+helmholtz/dir/geo_exact: helmholtz/helm_dir_iter_example.o
+	mkdir -p build
+#	$(FC) $(FFLAGS) -o build/helm_dir_iter_example helmholtz/helm_dir_iter_example.o $(FEND)
+	$(FC) $(FFLAGS) -o build/helm_dir_iter_example helmholtz/helm_dir_iter_example.o $(FEND)
+	cd ./build && ./helm_dir_iter_example
+
+# helmholtz/dir/geo_go3: maxwell/pec/em_aumfie_example.o
+# 	mkdir -p build
+# 	$(FC) $(FFLAGS) -o build/em_aumfie_example maxwell/pec/em_aumfie_example.o $(FEND)
+# 	cd ./build && ./em_aumfie_example
+
+# helmholtz/dir/scattering: maxwell/pec/em_aumfie_example.o
+# 	mkdir -p build
+# 	$(FC) $(FFLAGS) -o build/em_aumfie_example maxwell/pec/em_aumfie_example.o $(FEND)
+# 	cd ./build && ./em_aumfie_example
 
 
 
