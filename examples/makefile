@@ -18,16 +18,11 @@ FMMBIE_INSTALL_DIR = $(HOME)/lib
 FEND = -L${FMMBIE_INSTALL_DIR} $(LLINKLIB) 
 
 
-# For your OS, override the above by placing make variables in make.inc
--include make.inc
-
-
-
+# For your OS, override the above by placing make variables in make.inc located
+# in the root directory
+-include ../make.inc
 
 .PHONY: usage clean list
-
-
-
 
 default: usage
 
@@ -36,6 +31,8 @@ usage:
 	@echo "-------------------------------------------------------------------------"
 	@echo "Makefile for boundary integral examplee, please specify what to make:"
 	@echo ""
+	@echo "  make helmholtz/"
+	@echo "         "
 	@echo "  make maxwell/"
 	@echo "         pec/"
 	@echo "           aumfie .................. solve the mfie, then resolve for charge"
