@@ -69,6 +69,7 @@ c
         xyz_in(1) = 0.17d0
         xyz_in(2) = 0.23d0
         xyz_in(3) = -0.11d0
+
       elseif (trim(igeom).eq.'stellarator') then
 
         nuv(1) = 10
@@ -152,8 +153,17 @@ c
       call prin2('rres=*',rres,1)
       call prin2('errs=*',errs,niter)
 
- 2000 continue
 
+c      ifplot = 1
+c      if (ifplot .ne. 0) then
+         call surf_quadratic_msh_vtk_plot(npatches,norders,ixyzs,
+     $        iptype, npts, srccoefs, srcvals, 'scatterer.vtk',
+     $        'The Scatterer')
+
+c      end if
+      
+
+      
 c
 c       test solution at interior point
 c
@@ -165,11 +175,17 @@ c
         pot = pot + sigma(i)*wts(i)*ztmp
       enddo
 
+      print *
+      print *, '. . . testing solution using h3d_comb directly'
       call prin2('potex=*',potex,2)
       call prin2('pot=*',pot,2)
       erra = abs(pot-potex)/abs(potex)
       call prin2('relative error=*',erra,1)
 
+
+      print *
+      print *
+      
       ndtarg = 3
       ntarg = 1
       ipatch_id = -1
@@ -179,6 +195,7 @@ c
      1  npts,srccoefs,srcvals,ndtarg,ntarg,xyz_targ,ipatch_id,
      2  uvs_targ,eps,zpars,sigma,pot)
 
+      print *, '. . . testing solution using helm_comb_dir_eval'
       call prin2('potex=*',potex,2)
       call prin2('pot=*',pot,2)
       erra = abs(pot-potex)/abs(potex)
