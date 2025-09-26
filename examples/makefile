@@ -72,15 +72,16 @@ usage:
 
 # Helmholtz
 
-helmholtz/dir/geo_exact: helmholtz/helm_dir_iter_example.o
+helmholtz/dir/geo_exact: helmholtz/helm_dir_iter_geo_exact.o
 	mkdir -p build
-#	$(FC) $(FFLAGS) -o build/helm_dir_iter_example helmholtz/helm_dir_iter_example.o $(FEND)
-	$(FC) $(FFLAGS) -o build/helm_dir_iter_example helmholtz/helm_dir_iter_example.o $(FEND)
-	cd ./build && ./helm_dir_iter_example
+	rm -f build/*
+	$(FC) $(FFLAGS) -o build/helm_dir_iter_geo_exact helmholtz/helm_dir_iter_geo_exact.o $(FEND)
+#	cd ./build && ./helm_dir_iter_example
 
-# helmholtz/dir/geo_go3: maxwell/pec/em_aumfie_example.o
-# 	mkdir -p build
-# 	$(FC) $(FFLAGS) -o build/em_aumfie_example maxwell/pec/em_aumfie_example.o $(FEND)
+helmholtz/dir/geo_go3: helmholtz/helm_dir_iter_geo_go3.o
+	mkdir -p build
+	rm -f build/*
+	$(FC) $(FFLAGS) -o build/helm_dir_iter_geo_go3 helmholtz/helm_dir_iter_geo_go3.o $(FEND)
 # 	cd ./build && ./em_aumfie_example
 
 # helmholtz/dir/scattering: maxwell/pec/em_aumfie_example.o
@@ -110,5 +111,6 @@ maxwell/pec/nrccie: maxwell/pec/em_nrccie_example.o
 	cd ./build && ./em_nrccie_example
 
 clean:
+	rm -f helmholtz/*.o
 	rm -f maxwell/pec/*.o
 	rm -f build/*

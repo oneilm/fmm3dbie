@@ -40,9 +40,9 @@ c  patch type, iptype0 = 1, for triangles with RV nodes
 c                      = 11, for quadrangles with GL nodes
 c                      = 12, for quadrangles with Cheb nodes      
 c      
-      iptype0 = 11
+      iptype0 = 1
 
-      igeom = 'sphere'
+      igeom = 'stellarator'
       if (trim(igeom).eq.'sphere') then
         a = 1
         na = 2
